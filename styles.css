@@ -3,25 +3,6 @@ Styles for HTML5 File Drag & Drop demonstration
 Featured on SitePoint.com
 Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 */
-body
-{
-        font-family: "Segoe UI", Tahoma, Helvetica, freesans, sans-serif;
-        font-size: 90%;
-        margin: 10px;
-        color: #333;
-        background-color: #fff;
-}
-
-h1, h2
-{
-        font-size: 1.5em;
-        font-weight: normal;
-}
-
-h2
-{
-        font-size: 1.3em;
-}
 
 legend
 {

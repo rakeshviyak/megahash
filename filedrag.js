@@ -1,34 +1,27 @@
-/*
-filedrag.js - HTML5 File Drag & Drop demonstration
-Featured on SitePoint.com
-Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
-*/
-
 (function() {
     
     var fileManager = new FileReader();
-    // var fileManager2 = new FileReader();
-    
     var _binStart = "";
     var _binEnd = "";
     startTime=new Date().getTime();
-	// getElementById
+	
+
 	function $id(id) {
 		return document.getElementById(id);
 	}
 
 
-	// output information
-	function Output(msg) {
-		var m = $id("messages");
-		m.innerHTML = msg + m.innerHTML;
-	}
+	// // output information
+	// function Output(msg) {
+	// 	var m = $id("messages");
+	// 	m.innerHTML = msg + m.innerHTML;
+	// }
     
-	function OutputHash(eId, msg) {
-        $("#"+eId+" .hash").html(msg);
-        endTime=new Date().getTime();
-        console.log(endTime-startTime);
-	}
+	// function OutputHash(eId, msg) {
+ //        $("#"+eId+" .hash").html(msg);
+ //        endTime=new Date().getTime();
+ //        console.log(endTime-startTime);
+	// }
 
 
 	// file drag hover
@@ -58,19 +51,25 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 	// output file information
 	function ParseFile(file, id) {
 
-		Output(
-			"<p id='"+ id +"'>File information: <strong>" + file.name +
-			"</strong> type: <strong>" + file.type +
-			"</strong> size: <strong>" + file.size +
-			"</strong> <span style='color:green;'>hash: <strong class='hash'>" +
-			"</strong></span> " +
-            "</p>"
-		);
+		// Output(
+		// 	"<p id='"+ id +"'>File information: <strong>" + file.name +
+		// 	"</strong> type: <strong>" + file.type +
+		// 	"</strong> size: <strong>" + file.size +
+		// 	"</strong> <span style='color:green;'>hash: <strong class='hash'>" +
+		// 	"</strong></span> " +
+  //           "</p>"
+		// );
+        var newFile = new File({fileid:id,filename:file.name,filesize:file.size,filehash:"Dummy" });
+        files.add(newFile);  
+
 		
         // added to process the hash of the files:
-        var hash = new hashMe(file, function OutputHash(msg) {
-                                $("#"+ id +" .hash").html(msg);
-                          });
+        var hash = new hashMe(file, function OutputHash(msg,action) {
+                                	// $("#"+ id +" .hash").html("");
+                                	// $("#"+ id +" .hash").html(msg);
+                                	updateFile=files.where({filename:file.name,filesize:file.size,fileid:id});
+                                	updateFile[updateFile.length-1].set({filehash:msg});
+                                });
 
 	}
 
@@ -104,7 +103,6 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 	// call initialization file
 	if (window.File && window.FileList && window.FileReader) {
 		Init();
-		
 	}
 
 

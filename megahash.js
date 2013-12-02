@@ -1,10 +1,14 @@
+/*jslint browser: true*/
+/*global $, jQuery*/
+/*jshint multistr: true */
+
 /*******************
 ********************
 
 HTML5 / Javascript: 
 get hash of files using drag and drop
 
-Developed by Marco Antonio Alvarez => https://github.com/marcu87/hashme
+Developed by Marco Antonio Alvarez => https://github.com/rakeshviyak/megahash
 
 *******************/
 
@@ -90,6 +94,7 @@ var hashMe = function (file, callbackFunction) {
         var sliceFile=file.slice(start,end);
         fileManager.readAsBinaryString(sliceFile);
         this.currentChunk += 1;
+        callback(this.hashstatus((this.currentChunk/this.chunks)*100));
         console.log(file.name+":"+start+","+end+" chunk "+ this.currentChunk+"of "+this.chunks+":"+(new Date().getTime()-chunkTime)+"ms , Hash:"+this._binStart);
     };
     
@@ -99,7 +104,17 @@ var hashMe = function (file, callbackFunction) {
         other_array.forEach(function(v) {this.push(v)}, this);
     };
 
+    this.hashstatus= function(status){
+        str='<div class="progress progress-striped active"> \
+                <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" \
+                style="width:'+status+'%">\
+                    <span class="sr-only">'+status+'% Complete</span>\
+                </div>\
+            </div>';
+        return str;
+    };
 
-    this.calculateHashOfFile(file);
     callback = callbackFunction;
+    this.calculateHashOfFile(file);
+    
 };

@@ -1,0 +1,75 @@
+<html>
+<head>
+  <title>MegaHash - The javascript solution to fastly get the MD5 hash of files</title>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="keywords" content="3D Printer,Pirate3D,Buccaneer,Cartridges"/>
+  <meta name="description" content="Create MD5 for any file using Javascript"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="all" href="styles.css" />
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <style type="text/css"></style>
+
+  <script type="text/javascript" src="https://github.com/downloads/wycats/handlebars.js/handlebars-1.0.0.beta.6.js"></script>
+  <script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+  <script type="text/javascript" src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+  <script type="text/javascript" src="binding.js"></script>
+  
+  
+</head>
+
+<body>
+<script type="text/template" id="src">
+  <ul>
+      <li>Render count : {{rendered}}</li>
+      {{#each collection}}
+        <li>{{name}}</li>
+      {{/each}}
+  </ul>    
+</script>
+
+<script type="text/template" id="filelist">
+  <div class="rows col-md-12" id="<%= fileid %>">
+    <div>
+      <p>File Name: <%= filename%></p>
+      <p>File Size: <%= filesize%></p>
+      <p>Hash: <%= filehash%></p>
+      <button data-id="<%= cid%>" class="remove">remove</button>
+      <hr>
+    </div>
+  </div>    
+</script>
+
+<div class="container" id="container">
+  <h1>MegaHash</h1>
+  <h3>JavaScript MD5 File Hash Calculator. Supports any number and files and size. All calculations are done in the browser. Each file is divided into chunks to calculte the hash of the file</h3>
+  <form id="upload" method="POST" enctype="multipart/form-data">
+      <fieldset>
+          <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000000" />
+          <div>
+              <div id="filedrag">or drop files here</div>
+              <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+          </div>
+          <div id="submitbutton">
+              <button type="submit">Upload Files</button>
+          </div>
+      </fieldset>
+  </form>
+<!--   <div id="messages">
+      <p>Status Messages</p>
+  </div> -->
+  <div class="files">
+
+  </div>
+  <!-- <button>Render</button> -->
+</div>
+
+
+  <script type="text/javascript" src="megahash.js"></script>
+  <script type="text/javascript" src="filedrag.js"></script>
+  <script type="text/javascript" src="md5.js"></script>
+
+</body>
+</html>
