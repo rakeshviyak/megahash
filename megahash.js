@@ -8,7 +8,7 @@
 HTML5 / Javascript: 
 get hash of files using drag and drop
 
-Developed by Marco Antonio Alvarez => https://github.com/rakeshviyak/megahash
+=> https://github.com/rakeshviyak/megahash
 
 *******************/
 
@@ -89,7 +89,7 @@ var megaHash = function (file,fileid,iter,callbackFunction) {
     };
     
     this.hashStatus= function(status){
-        str='Calculating...<button class="cancel" data-id='+fileid+'>Cancel</button>\
+        str='Calculating...<button class="cancel btn btn-primary" data-id='+fileid+'>Cancel</button>\
                 <div class="progress progress-striped active"> \
                 <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" \
                 style="width:'+status+'%">\

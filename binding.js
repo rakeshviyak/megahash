@@ -56,10 +56,6 @@ var ListView=Backbone.View.extend({
       this.template = _.template($('#filelist').html());
     },
 
-    // events: {
-    //   "click button": function() { $("body").append("<p>clicked</p>") }
-    // },
-
     events: {
       "click .remove":"remove",
       "click .cancel":"cancel",

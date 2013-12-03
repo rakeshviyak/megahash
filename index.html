@@ -24,15 +24,15 @@
 
 
 <script type="text/template" id="filelist">
-  <div class="rows col-md-12" id="<%= cid %>" data-fileid="<%= fileid %>" data-stop="<%= filestop %>">
-    <div>
-      <p>File Name: <%= fileobj.name%></p>
-      <p>File Size: <%= fileobj.size%></p>
+  <div class="well filebox" id="<%= cid %>" data-fileid="<%= fileid %>" data-stop="<%= filestop %>">
+      <div class="col-md-10">
+      <p>File Name: <%= fileobj.name%> (<%= fileobj.size%> bytes)</p>
       <p>Hash: <%= filehash%></p>
-      <p>Iteration<input data-id="<%= cid %>" value="<%= fileiter %>" type="number"></p>
-      <button data-id="<%= cid%>" class="remove">remove</button>
-      <hr>
-    </div>
+      </div>
+      <div class=="col-md-2">
+      <p>Iteration <input data-id="<%= cid %>" style="width:60px;" value="<%= fileiter %>" type="number"></p>
+      <button data-id="<%= cid%>" class="btn btn-primary remove">Remove</button>
+      </div>
   </div>    
 </script>
 
@@ -44,18 +44,15 @@
           <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000000" />
           <div>
               <div id="filedrag">or drop files here</div>
-              <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+              <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" class="" />
           </div>
           <div id="submitbutton">
               <button type="submit">Upload Files</button>
           </div>
       </fieldset>
   </form>
-<!--   <div id="messages">
-      <p>Status Messages</p>
-  </div> -->
-  <div class="files">
 
+  <div class="files ">
   </div>
 </div>
 

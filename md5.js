@@ -357,7 +357,7 @@ function binl_md5(x, len)
   return Array(a,b,c,d);
 }
 
-
+//Create custom md51_tail class to handle last chunk of data that are less than <64 bytes
 function binl_md51_tail(x,len,state,chunk){
   x[len >> 5] |= 0x80 << ((len) % 32);
   x[(((len + 64) >>> 9) << 4) + 14] = len+chunk;
