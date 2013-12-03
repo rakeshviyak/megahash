@@ -21,21 +21,15 @@
 </head>
 
 <body>
-<script type="text/template" id="src">
-  <ul>
-      <li>Render count : {{rendered}}</li>
-      {{#each collection}}
-        <li>{{name}}</li>
-      {{/each}}
-  </ul>    
-</script>
+
 
 <script type="text/template" id="filelist">
-  <div class="rows col-md-12" id="<%= fileid %>">
+  <div class="rows col-md-12" id="<%= cid %>" data-fileid="<%= fileid %>" data-stop="<%= filestop %>">
     <div>
-      <p>File Name: <%= filename%></p>
-      <p>File Size: <%= filesize%></p>
+      <p>File Name: <%= fileobj.name%></p>
+      <p>File Size: <%= fileobj.size%></p>
       <p>Hash: <%= filehash%></p>
+      <p>Iteration<input data-id="<%= cid %>" value="<%= fileiter %>" type="number"></p>
       <button data-id="<%= cid%>" class="remove">remove</button>
       <hr>
     </div>
@@ -63,7 +57,6 @@
   <div class="files">
 
   </div>
-  <!-- <button>Render</button> -->
 </div>
 
 

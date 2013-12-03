@@ -16,9 +16,7 @@ files = new Files();
 
 
 var FullTemplateView=Backbone.View.extend({
-    events: {
-        "click li": function() { $("body").append("<p>clicked</p>") }
-    },
+
     initialize: function() {
         this.rendered=0;
     },
@@ -64,18 +62,46 @@ var ListView=Backbone.View.extend({
 
     events: {
       "click .remove":"remove",
-      // "click .edit":"edit"
+      "click .cancel":"cancel",
+      "change input":"iteration",
     },
 
     remove:function(e){
         e.preventDefault();
         var id = $(e.currentTarget).data("id");
-
         var item = this.collection.get(id);
-        this.collection.remove(item);
-        return this;
+        if (item.toJSON().filestop==2){
+          this.collection.remove(item);
+          return this;
+        }else{
+          alert("Please cancel the hash before removing");
+        }
     },
-    
+
+    cancel:function(e){
+        e.preventDefault();
+        var id = $(e.currentTarget).data("id");
+        var item = this.collection.get(id);
+        item.set({filestop:1});
+    },
+
+    iteration:function(e){
+        // e.preventDefault();
+        var id = $(e.currentTarget).data("id");
+        var item = this.collection.get(id);
+        var iter = $(e.currentTarget).val();
+        if (item.toJSON().filestop==2){
+          item.set({fileiter:iter,filestop:0});
+          console.log(id,iter);
+          var hash = new megaHash(item.toJSON().fileobj,id,iter,function OutputHash(msg) {
+                                  files.get(id).set({filehash:msg});
+                                });
+
+        }else{
+          alert("Please wait for the current hashing to complete before changing the iteration");
+        }
+    },
+
     render:function() {
       var template = this.template,
                 el = this.$el;
@@ -83,7 +109,7 @@ var ListView=Backbone.View.extend({
       this.collection.each(function(file){
           f=file.toJSON();
           f['cid']=file.cid;
-          console.log(f);
+          // console.log(f);
           // j['id']=product.cid;
           // console.log(template);
           el.append(template(f));

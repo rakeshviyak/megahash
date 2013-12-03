@@ -358,29 +358,19 @@ function binl_md5(x, len)
 }
 
 
-function binl_md51_tail(x,len,state,start,chunk){
+function binl_md51_tail(x,len,state,chunk){
   x[len >> 5] |= 0x80 << ((len) % 32);
-  x[(((len + 64) >>> 9) << 4) + 14] = len+((chunk-1)*524288*4*8);
-  state=binl_md51(x,len,state,start);
+  x[(((len + 64) >>> 9) << 4) + 14] = len+chunk;
+  state=binl_md51(x,state);
   return state;
 }
 
 
-function binl_md51(x,len,state,start)
+function binl_md51(x,state)
 {
-  // /* append padding */
-  // x[len >> 5] |= 0x80 << ((len) % 32);
-  // x[(((len + 64) >>> 9) << 4) + 14] = len;
 
 
-
-  // var a =  -804118378,
-  //     b = -646938213,
-  //     c = -1620643822,
-  //     d = 127761773;
-
-
-  for(var i = start; i < x.length; i += 16)
+  for(var i = 0; i < x.length; i += 16)
   {
     var a = state[0];
     var b = state[1];
@@ -462,7 +452,7 @@ function binl_md51(x,len,state,start)
     // state=Array(a,b,c,d);
     // console.log(state);
   }
-  console.log(state);
+  // console.log(state);
   // state=Array(a,b,c,d);
   return state;
 }

@@ -11,19 +11,6 @@
 	}
 
 
-	// // output information
-	// function Output(msg) {
-	// 	var m = $id("messages");
-	// 	m.innerHTML = msg + m.innerHTML;
-	// }
-    
-	// function OutputHash(eId, msg) {
- //        $("#"+eId+" .hash").html(msg);
- //        endTime=new Date().getTime();
- //        console.log(endTime-startTime);
-	// }
-
-
 	// file drag hover
 	function FileDragHover(e) {
 		e.stopPropagation();
@@ -51,26 +38,13 @@
 	// output file information
 	function ParseFile(file, id) {
 
-		// Output(
-		// 	"<p id='"+ id +"'>File information: <strong>" + file.name +
-		// 	"</strong> type: <strong>" + file.type +
-		// 	"</strong> size: <strong>" + file.size +
-		// 	"</strong> <span style='color:green;'>hash: <strong class='hash'>" +
-		// 	"</strong></span> " +
-  //           "</p>"
-		// );
-        var newFile = new File({fileid:id,filename:file.name,filesize:file.size,filehash:"Dummy" });
+        var newFile = new File({fileid:id,fileobj:file,filehash:"Dummy",filestop:0,fileiter:1 });
         files.add(newFile);  
 
-		
         // added to process the hash of the files:
-        var hash = new hashMe(file, function OutputHash(msg,action) {
-                                	// $("#"+ id +" .hash").html("");
-                                	// $("#"+ id +" .hash").html(msg);
-                                	updateFile=files.where({filename:file.name,filesize:file.size,fileid:id});
-                                	updateFile[updateFile.length-1].set({filehash:msg});
+        var hash = new megaHash(file,newFile.cid,1,function OutputHash(msg) {
+                                	files.get(newFile.cid).set({filehash:msg});
                                 });
-
 	}
 
 
